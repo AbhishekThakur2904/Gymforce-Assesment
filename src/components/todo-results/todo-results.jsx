@@ -5,13 +5,14 @@ export const TodoResults = (props) => {
   const { todos } = props;
 
   const calculateChecked = () => {
-    // Function to calculate completed tasks
+    // Count completed tasks
+    const completedTasks = todos.filter((todo) => todo.checked);
+    return completedTasks.length;
   };
 
   return (
     <div className="todo-results">
-      Done:
-      {calculateChecked()}
+      Done: {calculateChecked()}
     </div>
   );
 };

@@ -6,11 +6,15 @@ export const TodoList = (props) => {
   const { todos, setTodos } = props;
 
   const handleDelete = (id) => {
-    // Function to delete task
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
   const toggleCheck = (id) => {
-    // Function to toggle task
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo
+      )
+    );
   };
 
   const handleKeyUp = (e, id) => {
@@ -25,18 +29,19 @@ export const TodoList = (props) => {
       {todos.length ? (
         <div className="todo-list-content">
           {todos.map((todoItem) => (
-            <Checkbox
-              key={todoItem.id}
-              label={todoItem.label}
-              checked={todoItem.checked}
-              onClick={() => toggleCheck(todoItem.id)}
-              onKeyUp={(e) => handleKeyUp(e, todoItem.id)}
-              onDelete={() => handleDelete(todoItem.id)}
-            />
+            <div key={todoItem.id}>
+              <Checkbox
+                label={todoItem.label}
+                checked={todoItem.checked}
+                onClick={() => toggleCheck(todoItem.id)}
+                onKeyUp={(e) => handleKeyUp(e, todoItem.id)}
+                onDelete={() => handleDelete(todoItem.id)}
+              />
+            </div>
           ))}
         </div>
       ) : (
-        <div className="no-todos">Looks like you&apos;re absolutely free today!</div>
+        <div className="no-todos">Looks like you're absolutely free today!</div>
       )}
     </div>
   );

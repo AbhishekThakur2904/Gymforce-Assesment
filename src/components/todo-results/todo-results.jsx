@@ -1,18 +1,15 @@
-import * as React from "react";
-import "./todo-results.scss";
+import React from 'react';
+import { Typography } from '@mui/material';
 
-export const TodoResults = (props) => {
-  const { todos } = props;
-
-  const calculateChecked = () => {
-    // Count completed tasks
-    const completedTasks = todos.filter((todo) => todo.checked);
-    return completedTasks.length;
-  };
+const TodoResults = ({ todos }) => {
+  // Calculate completed tasks count
+  const completedTasks = todos.filter((todo) => todo.checked).length;
 
   return (
-    <div className="todo-results">
-      Done: {calculateChecked()}
-    </div>
+    <Typography variant="h5" gutterBottom>
+      Completed Tasks: {completedTasks}
+    </Typography>
   );
 };
+
+export default TodoResults;
